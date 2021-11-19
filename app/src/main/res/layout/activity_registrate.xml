@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              style="@style/background"
+              android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:orientation="vertical">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blackcarbon">
+        <ImageView
+                android:layout_width="80dp"
+                android:layout_height="68dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
+                android:layout_weight="1" android:contentDescription="@string/header_logo"/>
+        <TextView
+                android:text="@string/title"
+                android:layout_width="wrap_content"
+                android:layout_height="68dp" android:id="@+id/textView1" android:layout_weight="1"
+                style="@style/text"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent" android:background="@color/white"
+            android:layout_height="565dp" android:layout_marginTop="20dp">
+        <TextView
+                android:text="@string/Registration_message"
+                android:layout_width="match_parent" style="@style/text.dark.center"
+                android:layout_height="41dp" android:id="@+id/registrationMessage"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="52dp">
+            <TextView
+                    android:text="@string/Registration_first_name"
+                    android:layout_width="0dp" style="@style/text.dark"
+                    android:layout_height="wrap_content" android:id="@+id/RegistartionFN" android:layout_weight="1"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" style="@style/text.dark"
+                    android:inputType="textPersonName"
+                    android:ems="10" android:hint="@string/hintfirstname"
+                    android:importantForAutofill="no"
+                    android:id="@+id/RegistartionFNV"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="64dp">
+            <TextView
+                    android:text="@string/Registration_last_name" style="@style/text.dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/RegistrationLN" android:layout_weight="1"/>
+            <EditText
+                    android:layout_width="wrap_content" style="@style/text.dark"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10" android:hint="@string/hintlastname"
+                    android:importantForAutofill="no"
+                    android:id="@+id/RegistrationLNV" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="65dp">
+            <TextView
+                    android:text="@string/Registration_phone"
+                    android:layout_width="wrap_content" style="@style/text.dark"
+                    android:layout_height="wrap_content" android:id="@+id/RegistrationP" android:layout_weight="1"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" android:hint="@string/hintphone"
+                    android:importantForAutofill="no"
+                    android:ems="10" style="@style/text.dark"
+                    android:id="@+id/RegistrationPV" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+            <TextView
+                    android:text="@string/Registration_date_naissance"
+                    android:layout_width="wrap_content" style="@style/text.dark"
+                    android:layout_height="wrap_content" android:id="@+id/RegistrationDN" android:layout_weight="1"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="date" android:hint="@string/hintdatenaissance"
+                    android:importantForAutofill="no"
+                    android:ems="10" style="@style/text.dark"
+                    android:id="@+id/RegistrationDNV" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+            <TextView
+                    android:text="@string/Registration_email"
+                    android:layout_width="wrap_content" style="@style/text.dark"
+                    android:layout_height="56dp" android:id="@+id/registrationEmail" android:layout_weight="1"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:inputType="textEmailAddress" style="@style/text.dark"
+                    android:ems="10" android:hint="@string/hintmail"
+                    android:id="@+id/Registartionemail_value" android:layout_weight="1" android:importantForAutofill="no"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="88dp">
+            <TextView
+                    android:text="@string/password"
+                    android:layout_width="wrap_content" style="@style/text.dark"
+                    android:layout_height="54dp" android:id="@+id/RegistrationPassword" android:layout_weight="1"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="88dp" style="@style/text.dark"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/RegistartionPassword_value" android:layout_weight="1" android:hint="@string/hintpass" :importantForAutofill="no"
+                    android:importantForAutofill="no"/>
+        </LinearLayout>
+        <Button
+                android:text="@string/Registration_register"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp" android:id="@+id/RegistrationButton" app:backgroundTint="#459A18"
+                android:layout_marginLeft="100dp" android:layout_marginStart="100dp" android:onClick="register"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:background="@color/white">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="53dp">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/desktop"
+                    android:id="@+id/imageView2"
+                    android:layout_weight="1" android:contentDescription="@string/footer_desktop"
+                    android:onClick="register"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" app:srcCompat="@drawable/mess" android:id="@+id/imageView3"
+                    android:layout_weight="1" android:contentDescription="@string/footer_chat"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/mob" android:id="@+id/imageView4"
+                    android:layout_weight="1" android:contentDescription="@string/footer_mobile"/>
+        </LinearLayout>
+        <TextView
+                android:text="@string/footer"
+                android:layout_width="match_parent"
+                android:layout_height="36dp" android:id="@+id/textView" style="@style/text.center.tiny.dark"/>
+    </LinearLayout>
+</LinearLayout>

@@ -4,9 +4,26 @@
     <string name="sign_in">Sign in</string>
     <string name="title">Streaming App</string>
     <string name="welcome">welcome</string>
-    <string name="footer">© 2022 Copyright: ayrtongonsallo444@gmail.com</string>
+    <string name="footer">© 2022 Copyright: projetAndroid@gmail.com</string>
     <string name="footer_desktop">footer desktop</string>
     <string name="footer_chat">footer chat</string>
     <string name="footer_mobile">footer mobile</string>
     <string name="header_logo">header logo</string>
+    <string name="loginmessage">Login to your account</string>
+    <string name="username_email">Username/email</string>
+    <string name="password">password</string>
+    <string name="log_in">Log in</string>
+    <string name="hintmail">mail</string>
+    <string name="hintfirstname">fist name</string>
+    <string name="hintlastname">last name</string>
+    <string name="hintdatenaissance">11/07/2000</string>
+    <string name="hintphone">934984398</string>
+    <string name="hintpass">#@**#*#</string>
+    <string name="Registration_last_name">last name</string>
+    <string name="Registration_email">email</string>
+    <string name="Registration_register">register</string>
+    <string name="Registration_message">Create an account</string>
+    <string name="Registration_first_name">first name</string>
+    <string name="Registration_phone">Phone</string>
+    <string name="Registration_date_naissance">Date naissance</string>
 </resources>

@@ -18,26 +18,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="68dp" android:id="@+id/textView1" android:layout_weight="1"
                 style="@style/text"/>
-        <Button
-                android:text="@string/sign_in"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/button1" android:layout_weight="1"
-                style="@style/buttons" app:backgroundTint="@android:color/transparent" android:onClick="registrate"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="578dp">
-        <TextView
-                android:text="@string/welcome"
-                style="@style/text.dark.big"
+            android:layout_height="565dp" android:layout_marginTop="20dp">
+        <VideoView
                 android:layout_width="match_parent"
-                android:layout_height="192dp" android:id="@+id/textView2"/>
-        <Button
-                android:text="Sign up"
-                android:layout_width="176dp" app:backgroundTint="@color/green"
-                android:layout_height="wrap_content" android:id="@+id/button" style="@style/buttons.center"
-                android:onClick="login"/>
+                android:layout_height="375dp" android:id="@+id/videoView"/>
+        <ImageButton
+                android:layout_width="101dp"
+                android:layout_height="62dp" app:srcCompat="@android:drawable/ic_media_play"
+                android:id="@+id/imageButton" android:background="@color/black" android:layout_marginLeft="100dp"
+                android:layout_marginStart="100dp"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"

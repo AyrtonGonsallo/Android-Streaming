@@ -18,26 +18,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="68dp" android:id="@+id/textView1" android:layout_weight="1"
                 style="@style/text"/>
-        <Button
-                android:text="@string/sign_in"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/button1" android:layout_weight="1"
-                style="@style/buttons" app:backgroundTint="@android:color/transparent" android:onClick="registrate"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="578dp">
+            android:layout_width="match_parent" android:background="@color/white"
+            android:layout_height="565dp" android:layout_marginTop="20dp">
         <TextView
-                android:text="@string/welcome"
-                style="@style/text.dark.big"
+                android:text="@string/loginmessage"
+                android:layout_width="match_parent" style="@style/text.dark.center"
+                android:layout_height="41dp" android:id="@+id/loginMessage"/>
+        <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="192dp" android:id="@+id/textView2"/>
+                android:layout_height="90dp">
+            <TextView
+                    android:text="@string/username_email"
+                    android:layout_width="wrap_content" style="@style/text.dark"
+                    android:layout_height="56dp" android:id="@+id/Username_email" android:layout_weight="1"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:inputType="textEmailAddress" style="@style/text.dark"
+                    android:ems="10" android:hint="@string/hintmail"
+                    android:id="@+id/Username_email_value" android:layout_weight="1" android:importantForAutofill="no"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="88dp">
+            <TextView
+                    android:text="@string/password"
+                    android:layout_width="wrap_content" style="@style/text.dark"
+                    android:layout_height="54dp" android:id="@+id/Password" android:layout_weight="1"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="88dp" style="@style/text.dark"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/Password_value" android:layout_weight="1" android:hint="@string/hintpass" :importantForAutofill="no"
+                    android:importantForAutofill="no"/>
+        </LinearLayout>
         <Button
-                android:text="Sign up"
-                android:layout_width="176dp" app:backgroundTint="@color/green"
-                android:layout_height="wrap_content" android:id="@+id/button" style="@style/buttons.center"
-                android:onClick="login"/>
+                android:text="@string/log_in"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp" android:id="@+id/LoginButton" app:backgroundTint="#459A18"
+                android:layout_marginLeft="100dp" android:layout_marginStart="100dp" android:onClick="validation"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
