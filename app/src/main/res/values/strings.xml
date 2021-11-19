@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AppStreaming</string>
+    <string name="button">Button</string>
+    <string name="sign_in">Sign in</string>
+    <string name="title">Streaming App</string>
+    <string name="welcome">welcome</string>
+</resources>
