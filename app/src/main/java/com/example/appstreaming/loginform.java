@@ -41,7 +41,7 @@ public class loginform extends AppCompatActivity {
                             String res=pd.getResult();
                             if(res.equals("Login Success")){
                                 Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),VideoPlayer.class));
+                                startActivity(new Intent(getApplicationContext(),Presentation.class));
                                 finish();
                             }
                             else{

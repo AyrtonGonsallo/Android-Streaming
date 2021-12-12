@@ -24,6 +24,9 @@
     <style name="text.dark">
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="text.clear">
+        <item name="android:textColor">@color/white</item>
+    </style>
     <style name="text.dark.center">
         <item name="android:textSize">30sp</item>
         <item name="android:layout_marginLeft">20dp</item>
@@ -41,10 +44,20 @@
     <style name="text.dark.tiny">
         <item name="android:textSize">15sp</item>
     </style>
+    <style name="text.verytiny">
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="text.verytiny.dark">
+        <item name="android:textColor">@color/black</item>
+
+    </style>
     <style name="text.big">
         <item name="android:textSize">40sp</item>
     </style>
     <style name="text.dark.big">
+        <item name="android:textSize">40sp</item>
+    </style>
+    <style name="text.clear.big">
         <item name="android:textSize">40sp</item>
     </style>
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="120dp"
+              android:layout_height="200dp" android:orientation="vertical"
+              android:padding="10dp">
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/the_delta_force"
+            android:id="@+id/movie_Image_Picture" android:background="@color/blackcarbon"
+            android:contentDescription="@string/movie" android:layout_weight="2"/>
+    <Button
+            android:text="@string/movie_title"
+            android:layout_width="match_parent" style="@style/text.verytiny.dark"
+            android:layout_height="wrap_content" android:id="@+id/movie_Title"
+            android:background="@color/gray" android:layout_weight="1" app:backgroundTint="@color/gray"
+            android:clickable="true" />
+</LinearLayout>

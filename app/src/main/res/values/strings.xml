@@ -26,4 +26,11 @@
     <string name="Registration_first_name">first name</string>
     <string name="Registration_phone">Phone</string>
     <string name="Registration_date_naissance">Date naissance</string>
+    <string name="_0_00">0:00</string>
+    <string name="_3_55">3:55</string>
+    <string name="buttonplay_pause">buttonplay/pause</string>
+    <string name="movie">movie</string>
+    <string name="movie_title">movie_title</string>
+    <string name="all_movies">All Movies</string>
+    <string name="all_series">All Series</string>
 </resources>
