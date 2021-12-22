@@ -2,30 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools" style="@style/background"
-              android:layout_width="match_parent" android:layout_height="match_parent"
+              android:layout_width="match_parent" android:layout_height="wrap_content"
               android:orientation="vertical">
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="34dp"
-            android:background="@color/blackcarbon">
-        <ImageView
-                android:layout_width="3dp"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
-                android:layout_weight="1" android:contentDescription="@string/header_logo"/>
-        <TextView
-                android:text="@string/title"
-                android:layout_width="wrap_content"
-                android:layout_height="68dp" android:id="@+id/textView1" android:layout_weight="1"
-                style="@style/text"/>
-    </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_marginTop="0dp">
+            android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="240dp" android:layout_marginBottom="0dp">
+                android:layout_marginBottom="0dp" android:layout_weight="20" android:layout_height="wrap_content">
 
             <VideoView
                     android:layout_width="match_parent"
@@ -35,69 +20,51 @@
                     app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0"/>
             <ProgressBar
                     style="?android:attr/progressBarStyle"
-                    android:layout_width="147dp"
-                    android:layout_height="113dp"
+                    android:layout_width="200dp"
+                    android:layout_height="240dp"
                     android:id="@+id/buffer_progress"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@+id/mainVideoView" android:indeterminate="true"
-                    android:visibility="invisible"
-            />
+                    android:visibility="invisible"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:background="#C5C5C5" android:layout_marginBottom="05dp">
-            <SeekBar
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp" android:id="@+id/progress" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:background="#68000000" android:layout_marginTop="-70dp"
+                android:layout_weight="1">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:layout_weight="2">
+                    android:layout_height="wrap_content">
                 <TextView
                         android:text="@string/_0_00"
-                        android:layout_width="64dp" style="@style/text.dark.big"
-                        android:layout_height="wrap_content" android:id="@+id/current" android:layout_weight="1"/>
+                        android:layout_width="wrap_content" style="@style/text.big"
+                        android:layout_height="match_parent" android:id="@+id/current" android:layout_weight="1"/>
                 <ImageButton
-                        android:layout_width="81dp"
-                        android:layout_height="51dp" app:srcCompat="@android:drawable/ic_media_play"
-                        android:id="@+id/play_pause" android:background="@color/black" android:layout_marginLeft="0dp"
-                        android:layout_marginStart="0dp" android:contentDescription="@string/buttonplay_pause"/>
-                <TextView
-                        android:text="@string/_3_55" style="@style/text.dark.big"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/duration" android:layout_weight="1"/>
+                        android:layout_height="match_parent" app:srcCompat="@android:drawable/ic_media_play"
+                        android:id="@+id/play_pause" android:background="#92000000" android:layout_marginLeft="0dp"
+                        android:layout_marginStart="0dp" android:contentDescription="@string/buttonplay_pause"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:text="@string/_3_55" style="@style/text.big"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:id="@+id/duration" android:layout_weight="1"/>
+                <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/full_screen">
+
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" app:srcCompat="@drawable/fullscreenout"
+                            android:id="@+id/image_full_screen" android:contentDescription="@string/full_screen_image"/>
+                </FrameLayout>
             </LinearLayout>
+            <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/progress"/>
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/white" android:visibility="gone">
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="53dp">
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/desktop"
-                    android:id="@+id/imageView2"
-                    android:layout_weight="1" android:contentDescription="@string/footer_desktop"/>
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/mess" android:id="@+id/imageView3"
-                    android:layout_weight="1" android:contentDescription="@string/footer_chat"/>
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/mob" android:id="@+id/imageView4"
-                    android:layout_weight="1" android:contentDescription="@string/footer_mobile"/>
-        </LinearLayout>
-        <TextView
-                android:text="@string/footer"
-                android:layout_width="match_parent"
-                android:layout_height="36dp" android:id="@+id/textView" style="@style/text.center.tiny.dark"/>
     </LinearLayout>
 </LinearLayout>

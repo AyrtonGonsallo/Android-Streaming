@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools" style="@style/background"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              tools:context=".Offline" style="@style/background"
               android:layout_width="match_parent" android:layout_height="wrap_content"
               android:orientation="vertical">
     <LinearLayout
@@ -26,29 +26,22 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_weight="1">
+                android:layout_weight="5" android:layout_height="0dp">
             <TextView
-                    android:text="@string/all_movies"
+                    android:text="@string/your_files"
                     android:layout_width="match_parent" style="@style/text.clear.big"
-                    android:layout_height="wrap_content" android:id="@+id/textView3"
-                    android:background="@color/blackcarbon"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/blackcarbon" android:id="@+id/offLine_text"/>
             <GridView
                     android:layout_width="match_parent" android:numColumns="3"
-                    android:layout_height="match_parent" android:id="@+id/moviesView"/>
+                    android:layout_height="wrap_content" android:id="@+id/offLineView"/>
         </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_weight="1">
-            <TextView
-                    android:text="@string/all_series"
-                    android:layout_width="match_parent" style="@style/text.clear.big"
-                    android:layout_height="wrap_content" android:id="@+id/textView4"
-                    android:background="@color/blackcarbon"/>
-            <GridView android:numColumns="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/seriesView"/>
-        </LinearLayout>
+        <Button
+                android:text="Online content"
+                android:layout_width="match_parent" app:backgroundTint="#459A18" style="@style/text.center"
+                android:layout_height="0dp" android:id="@+id/offlinebutton" android:layout_weight="1"
+                app:cornerRadius="20dp" android:layout_marginLeft="30dp" android:layout_marginStart="30dp"
+                android:layout_marginRight="30dp" android:layout_marginEnd="30dp" android:onClick="goOnline"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"

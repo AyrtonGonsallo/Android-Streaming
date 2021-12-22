@@ -33,4 +33,9 @@
     <string name="movie_title">movie_title</string>
     <string name="all_movies">All Movies</string>
     <string name="all_series">All Series</string>
+    <string name="full_screen_image">TODO</string>
+    <string name="your_files">Your files</string>
+    <string name="envoyer">Envoyer</string>
+    <string name="fullscreenimagedesc">fullscreenimagedesc</string>
+    <string name="comment">comment</string>
 </resources>

@@ -1,48 +1,129 @@
 package com.example.appstreaming;
 
 
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Presentation extends AppCompatActivity {
     private GridView moviesView;
-    private int clickedMovie;
+    private GridView seriesView;
+    UrlBroker broker;
+    private SeriesModel seriemodel;
     private CatalogueModel model;
+    List<Series> allseries=new ArrayList<>();
     List<Movies> allmovies=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentation);
+        //liasion pour films
         moviesView=findViewById(R.id.moviesView);
         model=new CatalogueModel(getApplicationContext(),R.layout.movie,allmovies);
         moviesView.setAdapter(model);
-        //int mid, String name, String genre, String rdate, String runtime, String description, String keywords_en, String imgpath, String videopath
-        Movies m1=new Movies(2,"joker","crime/drame","2019","122","Dans les années 1980, à Gotham City, Arthur Fleck, un comédien de stand-up raté est agressé alors qu'il ère dans les rues de la ville déguisé en clown. Méprisé de tous et bafoué, il bascule peu à peu dans la folie pour devenir le Joker, un dangereux tueur psychotique.","mental illness, madness, joaquin phoenix","https://ayr-streaming.herokuapp.com/image-uploads/joker.jpg","https://ayr-streaming.herokuapp.com/video-uploads/JOKER%20-%20Final%20Trailer%20-%20Now%20Playing%20In%20Theaters.mp4");
-        Movies m2=new Movies(5,"legendary assassin","action/arts martiaux","2008","100","Bo (Wu Jing) débarque sur une petite île près de Hong-Kong pour éxécuter un chef mafieux mais il s'y retrouve coincé à cause d'un typhon. Il rencontre par la suite une agent de police à qui il cache sa véritable identité qui l'aidera à se loger. S'engagera dès lors une chasse à l'homme impitoyable confrontant la pègre locale à notre tueur à gages, sa nouvelle amie et ses collègues.","kung-fu, kung fu, assassin, fight scenes, martial .","https://ayr-streaming.herokuapp.com/image-uploads/legendary%20assassin.jpg","https://ayr-streaming.herokuapp.com/video-uploads/Legendary%20Assassin%20-%20Trailer.mp4");
-        Movies m3=new Movies(2,"joker","crime/drame","2019","122","Dans les années 1980, à Gotham City, Arthur Fleck, un comédien de stand-up raté est agressé alors qu'il ère dans les rues de la ville déguisé en clown. Méprisé de tous et bafoué, il bascule peu à peu dans la folie pour devenir le Joker, un dangereux tueur psychotique.","mental illness, madness, joaquin phoenix","https://ayr-streaming.herokuapp.com/image-uploads/joker.jpg","https://ayr-streaming.herokuapp.com/video-uploads/JOKER%20-%20Final%20Trailer%20-%20Now%20Playing%20In%20Theaters.mp4");
-        Movies m4=new Movies(5,"legendary assassin","action/arts martiaux","2008","100","Bo (Wu Jing) débarque sur une petite île près de Hong-Kong pour éxécuter un chef mafieux mais il s'y retrouve coincé à cause d'un typhon. Il rencontre par la suite une agent de police à qui il cache sa véritable identité qui l'aidera à se loger. S'engagera dès lors une chasse à l'homme impitoyable confrontant la pègre locale à notre tueur à gages, sa nouvelle amie et ses collègues.","kung-fu, kung fu, assassin, fight scenes, martial .","https://ayr-streaming.herokuapp.com/image-uploads/legendary%20assassin.jpg","https://ayr-streaming.herokuapp.com/video-uploads/Legendary%20Assassin%20-%20Trailer.mp4");
-        Movies m5=new Movies(2,"joker","crime/drame","2019","122","Dans les années 1980, à Gotham City, Arthur Fleck, un comédien de stand-up raté est agressé alors qu'il ère dans les rues de la ville déguisé en clown. Méprisé de tous et bafoué, il bascule peu à peu dans la folie pour devenir le Joker, un dangereux tueur psychotique.","mental illness, madness, joaquin phoenix","https://ayr-streaming.herokuapp.com/image-uploads/joker.jpg","https://ayr-streaming.herokuapp.com/video-uploads/JOKER%20-%20Final%20Trailer%20-%20Now%20Playing%20In%20Theaters.mp4");
-        Movies m6=new Movies(5,"legendary assassin","action/arts martiaux","2008","100","Bo (Wu Jing) débarque sur une petite île près de Hong-Kong pour éxécuter un chef mafieux mais il s'y retrouve coincé à cause d'un typhon. Il rencontre par la suite une agent de police à qui il cache sa véritable identité qui l'aidera à se loger. S'engagera dès lors une chasse à l'homme impitoyable confrontant la pègre locale à notre tueur à gages, sa nouvelle amie et ses collègues.","kung-fu, kung fu, assassin, fight scenes, martial .","https://ayr-streaming.herokuapp.com/image-uploads/legendary%20assassin.jpg","https://ayr-streaming.herokuapp.com/video-uploads/Legendary%20Assassin%20-%20Trailer.mp4");
-        allmovies.add(m1);
-        allmovies.add(m2);
-        allmovies.add(m3);
-        allmovies.add(m4);
-        allmovies.add(m5);
-        allmovies.add(m6);
-        model.notifyDataSetChanged();
+        //liaison pour series
+        seriesView=findViewById(R.id.seriesView);
+        seriemodel=new SeriesModel(getApplicationContext(),R.layout.movie,allseries);
+        seriesView.setAdapter(seriemodel);
+        broker=new UrlBroker();
+        //recuperer les films et series de la base
+        getMoviesData();
+        getSeriesData();
 
     }
 
-    public void playVid(Movies mm){
+    public void getMoviesData(){
+        Log.i("films","requete en cours");
+        allmovies.clear();model.notifyDataSetChanged();
+        RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
+        String url="https://interface-android-mysql.herokuapp.com/getLast4Movies.php";
+        StringRequest sr=new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jo;
+                try {
+                    Log.i("films reponse",response);
+                    jo=new JSONObject(response);
+                    JSONArray tableau=jo.getJSONArray("data");
+                    for (int i=0;i<tableau.length();i++){
+                        Movies mi=new Movies();
+                        JSONObject film=tableau.getJSONObject(i);
+                        mi.setMid(film.getInt("mid"));
+                        mi.setName(film.getString("name"));
+                        mi.setDescription(film.getString("description"));
+                        mi.setRuntime(film.getString("runtime"));
+                        mi.setStatus("ONLINE");
+                        mi.setImgpath(broker.broke(film.getString("imgpath")));
+                        mi.setVideopath(broker.broke(film.getString("videopath")));
+                        allmovies.add(mi);
+                    }
+                    model.notifyDataSetChanged();
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+}
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("films reponse","pas de connexion");
+            }
+        });
+        queue.add(sr);
     }
+
+    public void getSeriesData(){
+        Log.i("series debut","requete en cours");
+        allseries.clear();seriemodel.notifyDataSetChanged();
+        RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
+        String url="https://interface-android-mysql.herokuapp.com/getLast4Series.php";
+        StringRequest sr=new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jo;
+                try {
+                    Log.i("series reponse",response);
+                    jo=new JSONObject(response);
+                    JSONArray tableau=jo.getJSONArray("data");
+                    for (int i=0;i<tableau.length();i++){
+                        Series si=new Series();
+                        JSONObject array_of_series=tableau.getJSONObject(i);
+                        si.setSid(array_of_series.getInt("sid"));
+                        si.setName(array_of_series.getString("name"));
+                        si.setDescription(array_of_series.getString("description"));
+                        si.setRuntime(array_of_series.getString("runtime"));
+                        si.setImgpath(broker.broke(array_of_series.getString("imgpath")));
+                        si.setSeasons(array_of_series.getInt("seasons"));
+                        si.setEpisods((array_of_series.getInt("episods")));
+                        allseries.add(si);
+                    }
+                    seriemodel.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("series reponse","pas de connexion");
+            }
+        });
+        queue.add(sr);
+    }
+
 }

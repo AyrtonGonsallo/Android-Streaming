@@ -1,6 +1,7 @@
 package com.example.appstreaming;
 
 import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -25,11 +27,16 @@ public class VideoPlayer extends AppCompatActivity {
     private boolean isplaying=false;
     private int d=0,c=0;
     Movies currentMovie;
+    private ImageView full_screen_button;
+    private  boolean fullscreen=false;
+    private String cur;
+    private LinearLayout commentZone;
 
 
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         currentMovie= (Movies) getIntent().getSerializableExtra("movie");
         Log.i("movie to play",currentMovie.getName());
@@ -38,12 +45,51 @@ public class VideoPlayer extends AppCompatActivity {
         duration=findViewById(R.id.duration);
         current=findViewById(R.id.current);
         progress=findViewById(R.id.progress);
-
+        full_screen_button=findViewById(R.id.image_full_screen);
         buffer=findViewById(R.id.buffer_progress);
         play_pause =findViewById(R.id.play_pause);
         videoURI=Uri.parse(currentMovie.getVideopath());
         mainVideoView.setVideoURI(videoURI);
+        commentZone =findViewById(R.id.commentZone);
+        if(currentMovie.getStatus().equals("OFFLINE")){
+            commentZone.setVisibility(View.GONE);
+        }else{
+
+        }
         mainVideoView.requestFocus();
+        if(savedInstanceState!=null){
+            c=savedInstanceState.getInt("time");
+            d=savedInstanceState.getInt("duration");
+            progress.setMax(d);
+            progress.setProgress(c);
+            mainVideoView.seekTo(c);
+            current.setText(String.format("%02d:%02d",c/60000,(c/1000)%60));
+            savedInstanceState.remove("time");
+            savedInstanceState.remove("duration");
+        }
+
+
+
+
+
+
+        full_screen_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(fullscreen==false){
+                    fullscreen=true;
+                    full_screen_button.setImageResource(R.drawable.fullscreen_in);//vers l'interieur
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
+                else{
+                    fullscreen=false;
+                    full_screen_button.setImageResource(R.drawable.fullscreenout);//vers l'exterieur
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
+            }
+        });
+
         mainVideoView.setOnInfoListener(new MediaPlayer.OnInfoListener() {
             @Override
             public boolean onInfo(MediaPlayer mp, int i, int i1) {
@@ -78,7 +124,7 @@ public class VideoPlayer extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     progress.setProgress(c);
-                                    String cur=String.format("%02d:%02d",c/60000,(c/1000)%60);
+                                    cur=String.format("%02d:%02d",c/60000,(c/1000)%60);
                                     current.setText(cur);
 
                                 }
@@ -93,6 +139,12 @@ public class VideoPlayer extends AppCompatActivity {
                 }.start();
             }
         });
+
+
+
+
+
+
         mainVideoView.start();
         isplaying=true;
         //@android:drawable/ic_media_play
@@ -129,12 +181,20 @@ public class VideoPlayer extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 mainVideoView.seekTo(videoProgress);
+                cur=String.format("%02d:%02d",c/60000,(c/1000)%60);
+                current.setText(cur);
             }
         });
 
 
     }
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("time", c);
+        savedInstanceState.putInt("duration", d);
 
+    }
 
 
 }

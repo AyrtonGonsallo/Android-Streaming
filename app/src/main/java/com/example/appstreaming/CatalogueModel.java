@@ -35,10 +35,12 @@ public class CatalogueModel extends ArrayAdapter<Movies> {
         movieTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Log.i("demarer","1 demarage du player");
                 Intent intent=new Intent(getContext(),VideoPlayer.class);
                 Log.i("demarer","2 recuperation du film actuel");
                 intent.putExtra("movie",listItems.get(pos));
+                intent.putExtra("status",listItems.get(pos).getStatus());
                 Log.i("demarer","3 envoi de l'intent");
                 getContext().startActivity(intent);
                 Log.i("demarer","4 recuperation du player");

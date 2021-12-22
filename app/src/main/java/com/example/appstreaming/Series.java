@@ -1,32 +1,30 @@
 package com.example.appstreaming;
 
-import java.io.Serializable;
-
-public class Movies implements Serializable {
-    private int mid;
+public class Series {
+    private int sid;
     private String name;
     private String genre;
     private String rdate;
     private String runtime;
     private String description;
     private String keywords_en;
-    private String status;
+    private int episods;
 
-    public String getStatus() {
-        return status;
+    public int getEpisods() {
+        return episods;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEpisods(int episods) {
+        this.episods = episods;
     }
 
-    public Movies() {
+    public Series() {
     }
 
     private String imgpath;
 
-    public Movies(int mid, String name, String genre, String rdate, String runtime, String description, String keywords_en, String imgpath, String videopath) {
-        this.mid = mid;
+    public Series(int sid, String name, String genre, String rdate, String runtime, String description, String keywords_en, String imgpath, int seasons) {
+        this.sid = sid;
         this.name = name;
         this.genre = genre;
         this.rdate = rdate;
@@ -34,17 +32,17 @@ public class Movies implements Serializable {
         this.description = description;
         this.keywords_en = keywords_en;
         this.imgpath = imgpath;
-        this.videopath = videopath;
+        this.seasons = seasons;
     }
 
-    private String videopath;
+    private int seasons;
 
-    public int getMid() {
-        return mid;
+    public int getSid() {
+        return sid;
     }
 
-    public void setMid(int mid) {
-        this.mid = mid;
+    public void setSid(int sid) {
+        this.sid = sid;
     }
 
     public String getName() {
@@ -103,11 +101,11 @@ public class Movies implements Serializable {
         this.imgpath = imgpath;
     }
 
-    public String getVideopath() {
-        return videopath;
+    public int getSeasons() {
+        return seasons;
     }
 
-    public void setVideopath(String videopath) {
-        this.videopath = videopath;
+    public void setSeasons(int seasons) {
+        this.seasons = seasons;
     }
 }
