@@ -7,6 +7,11 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/commentZone" android:visibility="gone">
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

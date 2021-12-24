@@ -52,8 +52,8 @@ public class VideoPlayer extends AppCompatActivity {
         mainVideoView.setVideoURI(videoURI);
         commentZone =findViewById(R.id.commentZone);
         if(currentMovie.getStatus().equals("OFFLINE")){
-            commentZone.setVisibility(View.GONE);
-        }else{
+                commentZone.setVisibility(View.GONE);
+
 
         }
         mainVideoView.requestFocus();
