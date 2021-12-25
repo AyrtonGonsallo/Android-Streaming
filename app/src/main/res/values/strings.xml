@@ -31,11 +31,20 @@
     <string name="buttonplay_pause">buttonplay/pause</string>
     <string name="movie">movie</string>
     <string name="movie_title">movie_title</string>
-    <string name="all_movies">All Movies</string>
-    <string name="all_series">All Series</string>
+    <string name="all_movies">Last Movies</string>
+    <string name="all_series">Last Series</string>
     <string name="full_screen_image">TODO</string>
     <string name="your_files">Your files</string>
     <string name="envoyer">Envoyer</string>
     <string name="fullscreenimagedesc">fullscreenimagedesc</string>
     <string name="comment">comment</string>
+
+    <string name="online_content">Online content</string>
+    <string name="user">user</string>
+    <string name="user_infos">Current User</string>
+    <string name="search_by">Search by</string>
+    <string name="description">description</string>
+    <string name="keyword">keyword</string>
+    <string name="title_movie_name">title(movie name)</string>
+    <string name="todomoviesearch">TODO</string>
 </resources>

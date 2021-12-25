@@ -1,18 +1,21 @@
 package com.example.appstreaming;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.nio.Buffer;
 
@@ -20,6 +23,7 @@ public class VideoPlayer extends AppCompatActivity {
     private VideoView mainVideoView;
     private TextView duration;
     private  TextView current;
+    private TextView videoCommentaireMessage;
     private SeekBar progress;
     private ImageButton play_pause;
     private Uri videoURI;
@@ -38,6 +42,7 @@ public class VideoPlayer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         currentMovie= (Movies) getIntent().getSerializableExtra("movie");
         Log.i("movie to play",currentMovie.getName());
         setContentView(R.layout.activity_video_player);
@@ -48,9 +53,13 @@ public class VideoPlayer extends AppCompatActivity {
         full_screen_button=findViewById(R.id.image_full_screen);
         buffer=findViewById(R.id.buffer_progress);
         play_pause =findViewById(R.id.play_pause);
+        videoCommentaireMessage=findViewById(R.id.videoCommentaireMessage);
         videoURI=Uri.parse(currentMovie.getVideopath());
         mainVideoView.setVideoURI(videoURI);
         commentZone =findViewById(R.id.commentZone);
+        TextView userText=findViewById(R.id.user);
+        String fn="Uid:  "+MyApplication.getInstance().getUtilisateur().getId()+"\nName:  "+MyApplication.getInstance().getUtilisateur().getFirstname()+"\nSirname:  "+MyApplication.getInstance().getUtilisateur().getLastname();
+        userText.setText(fn);
         if(currentMovie.getStatus().equals("OFFLINE")){
                 commentZone.setVisibility(View.GONE);
 
@@ -195,6 +204,45 @@ public class VideoPlayer extends AppCompatActivity {
         savedInstanceState.putInt("duration", d);
 
     }
-
+    public void sendComment(View v){
+        //a changer
+        String text;
+        text=String.valueOf(videoCommentaireMessage.getText());
+        User u=MyApplication.getInstance().getUtilisateur();
+        int mid=currentMovie.getMid();
+        int uid=u.getId();
+        if( !(text.equals("")) ){
+            Handler handler=new Handler();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    String[] clees=new String[3];
+                    String[] valeurs=new String[3];
+                    clees[0]="uid";
+                    clees[1]="text";
+                    clees[2]="mid";
+                    valeurs[0]=String.valueOf( uid);
+                    valeurs[1]=text;
+                    valeurs[2]=String.valueOf(mid);
+                    //https://github.com/VishnuSivadasVS/Advanced-HttpURLConnection
+                    PutData pd=new PutData("https://interface-android-mysql.herokuapp.com/addComment.php","POST",clees,valeurs);
+                    if(pd.startPut()){
+                        if(pd.onComplete()){
+                            String res=pd.getResult();
+                            if(res.equals("add movie comment Success")){
+                                Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Comment required",Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

@@ -1,14 +1,10 @@
 package com.example.appstreaming;
 
-
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,41 +18,40 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Presentation extends AppCompatActivity {
-    private GridView moviesView;
-    private GridView seriesView;
+public class PresentationAll extends AppCompatActivity {
+    private GridView movieViewAll;
+    private GridView serieViewAll;
     UrlBroker broker;
     private SeriesModel seriemodel;
     private CatalogueModel model;
-    List<Series> lastSeries=new ArrayList<>();
-    List<Movies> lastMovies=new ArrayList<>();
+    List<Series> allSeries=new ArrayList<>();
+    List<Movies> allMovies=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_presentation);
+        setContentView(R.layout.activity_presentation_all);
         TextView userText=findViewById(R.id.user);
         String fn="Uid:  "+MyApplication.getInstance().getUtilisateur().getId()+"\nName:  "+MyApplication.getInstance().getUtilisateur().getFirstname()+"\nSirname:  "+MyApplication.getInstance().getUtilisateur().getLastname();
         userText.setText(fn);
         //liasion pour films
-        moviesView=findViewById(R.id.moviesView);
-        model=new CatalogueModel(getApplicationContext(),R.layout.movie,lastMovies);
-        moviesView.setAdapter(model);
+        movieViewAll=findViewById(R.id.movieViewAll);
+        model=new CatalogueModel(getApplicationContext(),R.layout.movie,allMovies);
+        movieViewAll.setAdapter(model);
         //liaison pour series
-        seriesView=findViewById(R.id.seriesView);
-        seriemodel=new SeriesModel(getApplicationContext(),R.layout.movie,lastSeries);
-        seriesView.setAdapter(seriemodel);
+        serieViewAll=findViewById(R.id.serieViewAll);
+        seriemodel=new SeriesModel(getApplicationContext(),R.layout.movie,allSeries);
+        serieViewAll.setAdapter(seriemodel);
         broker=new UrlBroker();
         //recuperer les films et series de la base
         getMoviesData();
         getSeriesData();
-
     }
 
     public void getMoviesData(){
         Log.i("films","requete en cours");
-        lastMovies.clear();model.notifyDataSetChanged();
+        allMovies.clear();model.notifyDataSetChanged();
         RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
-        String url="https://interface-android-mysql.herokuapp.com/getLast4Movies.php";
+        String url="https://interface-android-mysql.herokuapp.com/getAllMovies.php";
         StringRequest sr=new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -75,14 +70,14 @@ public class Presentation extends AppCompatActivity {
                         mi.setStatus("ONLINE");
                         mi.setImgpath(broker.broke(film.getString("imgpath")));
                         mi.setVideopath(broker.broke(film.getString("videopath")));
-                        lastMovies.add(mi);
+                        allMovies.add(mi);
                     }
                     model.notifyDataSetChanged();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-}
+            }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -94,9 +89,9 @@ public class Presentation extends AppCompatActivity {
 
     public void getSeriesData(){
         Log.i("series debut","requete en cours");
-        lastSeries.clear();seriemodel.notifyDataSetChanged();
+        allSeries.clear();seriemodel.notifyDataSetChanged();
         RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
-        String url="https://interface-android-mysql.herokuapp.com/getLast4Series.php";
+        String url="https://interface-android-mysql.herokuapp.com/getAllSeries.php";
         StringRequest sr=new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -115,7 +110,7 @@ public class Presentation extends AppCompatActivity {
                         si.setImgpath(broker.broke(array_of_series.getString("imgpath")));
                         si.setSeasons(array_of_series.getInt("seasons"));
                         si.setEpisods((array_of_series.getInt("episods")));
-                        lastSeries.add(si);
+                        allSeries.add(si);
                     }
                     seriemodel.notifyDataSetChanged();
 
@@ -130,14 +125,5 @@ public class Presentation extends AppCompatActivity {
             }
         });
         queue.add(sr);
-    }
-    public void full(View v){
-        startActivity(new Intent(getApplicationContext(),PresentationAll.class));
-    }
-    public void searchMovies(View v){
-        startActivity(new Intent(getApplicationContext(),Movie_Search.class));
-    }
-    public void searchSeries(View v){
-        //startActivity(new Intent(getApplicationContext(),PresentationAll.class));
     }
 }

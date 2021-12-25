@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -16,12 +17,17 @@ import java.util.List;
 public class Offline extends AppCompatActivity {
     private List<String> videoFilesList=new ArrayList<>();;
     private GridView offLineView;
+
     List<Movies> allmovies=new ArrayList<>();
     private CatalogueModel model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offline);
+        TextView userText=findViewById(R.id.user);
+        String fn="Uid:  "+MyApplication.getInstance().getUtilisateur().getId()+"\nName:  "+MyApplication.getInstance().getUtilisateur().getFirstname()+"\nSirname:  "+MyApplication.getInstance().getUtilisateur().getLastname();
+
+        userText.setText(fn);
         offLineView=findViewById(R.id.offLineView);
         model=new CatalogueModel(getApplicationContext(),R.layout.movie,allmovies);
         offLineView.setAdapter(model);
@@ -47,7 +53,7 @@ public class Offline extends AppCompatActivity {
         }
     }
 
-    private void  fillmusicList(){
+    private void  fillVideoList(){
         videoFilesList.clear();
         allmovies.clear();
         model.notifyDataSetChanged();
@@ -59,9 +65,9 @@ public class Offline extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fillmusicList();
+        fillVideoList();
         for (int i=0;i<5;i++){
-            String s=videoFilesList.get(i);
+            String s=videoFilesList.get(i);//probleme d'hier
             Movies m=new Movies();
             m.setName(s.substring(s.lastIndexOf('/')+1));
             m.setVideopath(s);
