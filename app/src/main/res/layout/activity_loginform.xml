@@ -3,7 +3,8 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               style="@style/background"
               android:layout_width="match_parent" android:layout_height="wrap_content"
-              android:orientation="vertical">
+              android:orientation="vertical"
+>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -55,7 +56,8 @@
                     android:layout_height="88dp" style="@style/text.dark"
                     android:inputType="textPassword"
                     android:ems="10"
-                    android:id="@+id/Password_value" android:layout_weight="1" android:hint="@string/hintpass" :importantForAutofill="no"
+                    android:id="@+id/Password_value" android:layout_weight="1" android:hint="@string/hintpass"
+                    :importantForAutofill="no"
                     android:importantForAutofill="no"/>
         </LinearLayout>
         <Button

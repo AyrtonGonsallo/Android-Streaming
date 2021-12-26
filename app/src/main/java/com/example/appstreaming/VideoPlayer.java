@@ -15,14 +15,28 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.Buffer;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class VideoPlayer extends AppCompatActivity {
     private VideoView mainVideoView;
     private TextView duration;
     private  TextView current;
+    private ListView commentListView;
     private TextView videoCommentaireMessage;
     private SeekBar progress;
     private ImageButton play_pause;
@@ -35,7 +49,8 @@ public class VideoPlayer extends AppCompatActivity {
     private  boolean fullscreen=false;
     private String cur;
     private LinearLayout commentZone;
-
+    CommentModel cModel;
+    List<Comments>commentsList=new ArrayList<Comments>();
 
     @SuppressLint("NewApi")
     @Override
@@ -49,6 +64,7 @@ public class VideoPlayer extends AppCompatActivity {
         mainVideoView=findViewById(R.id.mainVideoView);
         duration=findViewById(R.id.duration);
         current=findViewById(R.id.current);
+
         progress=findViewById(R.id.progress);
         full_screen_button=findViewById(R.id.image_full_screen);
         buffer=findViewById(R.id.buffer_progress);
@@ -62,9 +78,13 @@ public class VideoPlayer extends AppCompatActivity {
         userText.setText(fn);
         if(currentMovie.getStatus().equals("OFFLINE")){
                 commentZone.setVisibility(View.GONE);
-
-
         }
+
+        commentListView=findViewById(R.id.commentList);
+        cModel=new CommentModel(getApplicationContext(),R.layout.comment,commentsList);
+        commentListView.setAdapter(cModel);
+        getComments();
+
         mainVideoView.requestFocus();
         if(savedInstanceState!=null){
             c=savedInstanceState.getInt("time");
@@ -231,6 +251,7 @@ public class VideoPlayer extends AppCompatActivity {
                             String res=pd.getResult();
                             if(res.equals("add movie comment Success")){
                                 Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
+                                getComments();
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
@@ -243,6 +264,48 @@ public class VideoPlayer extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(),"Comment required",Toast.LENGTH_SHORT).show();
         }
+    }
+    public void getComments(){
+
+        String url = "https://interface-android-mysql.herokuapp.com/getComments.php";
+
+        Map<String, String> params = new HashMap();
+        params.put("mid", String.valueOf(currentMovie.getMid()));
+        commentsList.clear();
+        JSONObject parameters = new JSONObject(params);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("comments",response.toString());
+                try {
+                    JSONArray tableau=response.getJSONArray("comments");
+                    for (int i=0;i<tableau.length();i++){
+                        JSONObject comment=tableau.getJSONObject(i);
+                        Comments com=new Comments();
+                        com.setDate(Date.valueOf(comment.getString("date")));
+                        com.setCid(comment.getInt("cid"));
+                        com.setMid(comment.getInt("mid"));
+                        com.setText(comment.getString("text"));
+                        com.setUid(comment.getInt("user_id"));
+
+                        commentsList.add(com);
+                    }
+                    cModel.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                //TODO: handle failure
+            }
+        });
+
+        Volley.newRequestQueue(this).add(jsonRequest);
+
     }
 
 }
