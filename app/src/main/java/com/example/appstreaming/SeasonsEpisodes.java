@@ -46,6 +46,7 @@ public class SeasonsEpisodes extends AppCompatActivity {
 
         Map<String, String> params = new HashMap();
         params.put("sid", String.valueOf(currentSeason.getSid()));
+        params.put("season", String.valueOf(currentSeason.getName().charAt(7)));
         allEpisods.clear();
         JSONObject parameters = new JSONObject(params);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
