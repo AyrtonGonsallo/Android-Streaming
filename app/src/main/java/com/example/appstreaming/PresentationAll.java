@@ -39,7 +39,7 @@ public class PresentationAll extends AppCompatActivity {
         movieViewAll.setAdapter(model);
         //liaison pour series
         serieViewAll=findViewById(R.id.serieViewAll);
-        seriemodel=new SeriesModel(getApplicationContext(),R.layout.movie,allSeries);
+        seriemodel=new SeriesModel(getApplicationContext(),R.layout.serie,allSeries);
         serieViewAll.setAdapter(seriemodel);
         broker=new UrlBroker();
         //recuperer les films et series de la base

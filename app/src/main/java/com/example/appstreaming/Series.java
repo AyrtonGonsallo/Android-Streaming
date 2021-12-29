@@ -1,6 +1,8 @@
 package com.example.appstreaming;
 
-public class Series {
+import java.io.Serializable;
+
+public class Series implements Serializable {
     private int sid;
     private String name;
     private String genre;

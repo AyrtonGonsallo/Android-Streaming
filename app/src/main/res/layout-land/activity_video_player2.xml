@@ -5,10 +5,11 @@
               android:layout_width="match_parent" android:layout_height="wrap_content"
               android:orientation="vertical">
     <LinearLayout
+            android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/blackcarbon" android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:background="@color/blackcarbon">
         <ImageView
                 android:layout_width="80dp"
                 android:layout_height="68dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
@@ -34,16 +35,60 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+            android:orientation="vertical" android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/commentZone"
+            android:layout_marginLeft="20dp" android:layout_marginStart="20dp" android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp" android:layout_marginEnd="20dp" android:background="#4D000000">
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"><LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="All Comments"
+                    android:layout_width="match_parent" style="@style/text.big" android:background="#ff000000"
+                    android:layout_height="wrap_content"/>
+            <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/commentList">
+            </ListView>
+            <TextView
+                    android:text="Add Your Comment" android:background="#ff000000"
+                    android:layout_width="match_parent" style="@style/text.center"
+                    android:layout_height="wrap_content" android:id="@+id/textView6"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:gravity="start|top" style="@style/text.dark"
+                    android:ems="10" android:hint="@string/comment"
+                    android:id="@+id/videoCommentaireMessage" android:importantForAutofill="no"
+                    android:background="#FFFFFF"/>
+            <Button
+                    android:text="@string/envoyer" app:backgroundTint="#459A18"
+                    android:layout_width="match_parent" android:layout_marginLeft="100dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_height="wrap_content" android:id="@+id/videoCommentaireButton"
+                    app:cornerRadius="25dp" android:onClick="sendComment"/></LinearLayout>
+        </ScrollView>
+
+
+
+    </LinearLayout>
+    <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_weight="6">
+            android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginBottom="0dp">
+                android:layout_marginBottom="0dp" android:layout_weight="20" android:layout_height="wrap_content">
 
             <VideoView
                     android:layout_width="match_parent"
-                    android:layout_height="497dp" android:id="@+id/mainVideoView"
+                    android:layout_height="wrap_content" android:id="@+id/mainVideoView"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0"/>
@@ -61,7 +106,8 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:background="#B9000000" android:layout_marginTop="0dp">
+                android:layout_height="wrap_content" android:background="#68000000" android:layout_marginTop="-70dp"
+                android:layout_weight="1">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -87,84 +133,12 @@
                     <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" app:srcCompat="@drawable/fullscreenout"
-                            android:id="@+id/image_full_screen" android:contentDescription="@string/fullscreenimagedesc"/>
+                            android:id="@+id/image_full_screen" android:contentDescription="@string/full_screen_image"/>
                 </FrameLayout>
             </LinearLayout>
             <SeekBar
                     android:layout_width="match_parent"
-                    android:layout_height="0dp" android:id="@+id/progress" android:layout_weight="1"/>
+                    android:layout_height="wrap_content" android:id="@+id/progress"/>
         </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/commentZone"
-                android:layout_marginLeft="20dp" android:layout_marginStart="20dp" android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp" android:layout_marginEnd="20dp" android:background="#4D000000">
-
-            <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"><LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <TextView
-                        android:text="All Comments"
-                        android:layout_width="match_parent" style="@style/text.big" android:background="#ff000000"
-                        android:layout_height="wrap_content"/>
-                <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/commentList">
-                </ListView>
-                <TextView
-                        android:text="Add Your Comment" android:background="#ff000000"
-                        android:layout_width="match_parent" style="@style/text.center"
-                        android:layout_height="wrap_content" android:id="@+id/textView6"/>
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textMultiLine"
-                        android:gravity="start|top" style="@style/text.dark"
-                        android:ems="10" android:hint="@string/comment"
-                        android:id="@+id/videoCommentaireMessage" android:importantForAutofill="no"
-                        android:background="#FFFFFF"/>
-                <Button
-                        android:text="@string/envoyer" app:backgroundTint="#459A18"
-                        android:layout_width="match_parent" android:layout_marginLeft="100dp"
-                        android:layout_marginRight="100dp"
-                        android:layout_height="wrap_content" android:id="@+id/videoCommentaireButton"
-                        app:cornerRadius="25dp" android:onClick="sendComment"/></LinearLayout>
-            </ScrollView>
-
-
-
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white" android:layout_weight="1">
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="53dp">
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/desktop"
-                    android:id="@+id/imageView2"
-                    android:layout_weight="1" android:contentDescription="@string/footer_desktop"/>
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/mess" android:id="@+id/imageView3"
-                    android:layout_weight="1" android:contentDescription="@string/footer_chat"/>
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/mob" android:id="@+id/imageView4"
-                    android:layout_weight="1" android:contentDescription="@string/footer_mobile"/>
-        </LinearLayout>
-        <TextView
-                android:text="@string/footer"
-                android:layout_width="match_parent"
-                android:layout_height="36dp" android:id="@+id/textView" style="@style/text.center.tiny.dark"/>
     </LinearLayout>
 </LinearLayout>

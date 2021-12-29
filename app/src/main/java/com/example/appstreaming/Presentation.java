@@ -43,7 +43,7 @@ public class Presentation extends AppCompatActivity {
         moviesView.setAdapter(model);
         //liaison pour series
         seriesView=findViewById(R.id.seriesView);
-        seriemodel=new SeriesModel(getApplicationContext(),R.layout.movie,lastSeries);
+        seriemodel=new SeriesModel(getApplicationContext(),R.layout.serie,lastSeries);
         seriesView.setAdapter(seriemodel);
         broker=new UrlBroker();
         //recuperer les films et series de la base
@@ -138,6 +138,6 @@ public class Presentation extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),Movie_Search.class));
     }
     public void searchSeries(View v){
-        //startActivity(new Intent(getApplicationContext(),PresentationAll.class));
+        startActivity(new Intent(getApplicationContext(),Serie_Search.class));
     }
 }

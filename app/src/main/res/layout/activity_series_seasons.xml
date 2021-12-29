@@ -37,56 +37,14 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_marginTop="05dp" android:layout_weight="6">
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <Button
-                    android:text="See All" app:backgroundTint="#409A0F" style="@style/text.verytiny"
-                    app:cornerRadius="20dp" android:layout_marginLeft="10dp" android:layout_marginStart="10dp"
-                    android:layout_marginRight="10dp" android:layout_marginEnd="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" android:id="@+id/button2" android:onClick="full"/>
-            <Button
-                    android:text="Search Movies" app:backgroundTint="#409A0F" style="@style/text.verytiny"
-                    app:cornerRadius="20dp" android:layout_marginLeft="10dp" android:layout_marginStart="10dp"
-                    android:layout_marginRight="10dp" android:layout_marginEnd="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" android:onClick="searchMovies" android:layout_weight="1"/>
-            <Button
-                    android:text="Search Series" app:backgroundTint="#409A0F" style="@style/text.verytiny"
-                    app:cornerRadius="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp" android:layout_weight="1" android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp" android:onClick="searchSeries"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_weight="1">
-            <TextView
-                    android:text="@string/all_movies"
-                    android:layout_width="match_parent" style="@style/text.clear.big"
-                    android:layout_height="wrap_content" android:id="@+id/textView3"
-                    android:background="@color/blackcarbon"/>
-            <GridView
-                    android:layout_width="match_parent" android:numColumns="3"
-                    android:layout_height="match_parent" android:id="@+id/moviesView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_weight="1">
-            <TextView
-                    android:text="@string/all_series"
-                    android:layout_width="match_parent" style="@style/text.clear.big"
-                    android:layout_height="wrap_content" android:id="@+id/textView4"
-                    android:background="@color/blackcarbon"/>
-            <GridView android:numColumns="3"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content" android:id="@+id/seriesView"/>
-        </LinearLayout>
+        <TextView
+                android:text="All Seasons"
+                android:layout_width="match_parent" style="@style/text.clear.big"
+                android:layout_height="wrap_content"
+                android:background="@color/blackcarbon"/>
+        <GridView
+                android:layout_width="match_parent" android:numColumns="1"
+                android:layout_height="match_parent" android:id="@+id/seasonsView"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"

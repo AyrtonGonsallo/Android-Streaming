@@ -1,6 +1,7 @@
 package com.example.appstreaming;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,18 +30,18 @@ public class SeriesModel extends ArrayAdapter<Series> {
             View listItem=convertView;
             if(listItem==null)
             listItem= LayoutInflater.from(getContext()).inflate(resource,parent,false);
-            ImageView imageView=listItem.findViewById(R.id.movie_Image_Picture);
-            Button serieTitle=listItem.findViewById(R.id.movie_Title);
+            ImageView imageView=listItem.findViewById(R.id.serie_Image_Picture);
+            Button serieTitle=listItem.findViewById(R.id.serie_Title);
             serieTitle.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-            /*Log.i("demarer","1 demarage du player");
-            Intent intent=new Intent(getContext(),VideoPlayer.class);
-            Log.i("demarer","2 recuperation du film actuel");
-            intent.putExtra("movie",listItems.get(pos));
+            Log.i("demarer","1 serie");
+            Intent intent=new Intent(getContext(),SeriesSeasons.class);
+            Log.i("demarer","2 recuperation de la serie actuelle");
+            intent.putExtra("serie",listItems.get(pos));
             Log.i("demarer","3 envoi de l'intent");
             getContext().startActivity(intent);
-            Log.i("demarer","4 recuperation du player");*/
+
             }
             });
             String title=listItems.get(pos).getName();
