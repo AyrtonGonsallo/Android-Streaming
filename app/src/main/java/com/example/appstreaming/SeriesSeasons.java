@@ -45,7 +45,7 @@ public class SeriesSeasons extends AppCompatActivity {
 
     public void getSeasons(){
 
-        String url = "http://192.168.43.175/InterfaceAndroidMysql/getSeasons.php";
+        String url = "https://interface-android-mysql.herokuapp.com/getSeasons.php";
 
         Map<String, String> params = new HashMap();
         params.put("sid", String.valueOf(currentSerie.getSid()));

@@ -42,7 +42,7 @@ public class SeasonsEpisodes extends AppCompatActivity {
 
     public void getEpisods(){
 
-        String url = "http://192.168.43.175/InterfaceAndroidMysql/getEpisods.php";
+        String url = "https://interface-android-mysql.herokuapp.com/getEpisods.php";
 
         Map<String, String> params = new HashMap();
         params.put("sid", String.valueOf(currentSeason.getSid()));

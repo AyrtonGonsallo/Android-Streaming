@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.squareup.picasso.Picasso;
@@ -32,6 +33,8 @@ public class EpisodsModel extends ArrayAdapter<Episods> {
             listItem= LayoutInflater.from(getContext()).inflate(resource,parent,false);
         ImageView imageView=listItem.findViewById(R.id.episod_Image_Picture);
         Button serieTitle=listItem.findViewById(R.id.episod_Title);
+        TextView desc=listItem.findViewById(R.id.episodD);
+        TextView run=listItem.findViewById(R.id.episodR);
         serieTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,6 +49,8 @@ public class EpisodsModel extends ArrayAdapter<Episods> {
         });
         String title=listItems.get(pos).getName();
         String imgpath=listItems.get(pos).getImgpath();
+        desc.setText(listItems.get(pos).getDescription());
+        run.setText("time: "+listItems.get(pos).getRuntime()+" minutes");
         if(title!=null){
             //imageView.setImageResource(imgpath);
             Picasso.get().load(imgpath).into(imageView);
